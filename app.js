@@ -2,7 +2,7 @@ const express = require('express')
 const cors = require('cors')
 require ('dotenv').config()
 
-// const routersUsers = require('./router/user.js')
+const routersUsers = require('./router/user.js')
 const dbConnect = require('./configuracion/mongo.js')
 dbConnect()
 const app=express()
@@ -15,7 +15,7 @@ app.listen(port, () => {
     console.log(`Escuchando en el puerto ${port}`)
 })
 
-// app.use("/api/users", routersUsers);
+app.use("/api/users", routersUsers);
 
 
 
