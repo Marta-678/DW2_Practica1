@@ -4,6 +4,7 @@ const UserSchema = new mongoose.Schema(
   {
     name: {
       type: String,
+      // required: true
     },
     email: {
       type: String,
@@ -19,7 +20,14 @@ const UserSchema = new mongoose.Schema(
       enum: ["user", "admin"],
       default: "user"
     },
+    status:{
+      type: Boolean,
+      default: false
+    },
     verificationCode:{
+      type: String
+    },
+    verificationAttempts:{
         type:Number,
         default:3
     }

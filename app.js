@@ -4,8 +4,11 @@ require ('dotenv').config()
 
 const routersUsers = require('./router/user.js')
 const dbConnect = require('./configuracion/mongo.js')
+
+
 dbConnect()
 const app=express()
+
 app.use(cors())
 app.use(express.json())
 

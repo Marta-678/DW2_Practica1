@@ -6,6 +6,7 @@ const dbConnect = () => {
 
     try{
         mongoose.connect(db_uri)
+        console.log("Conectado a la BBDD")
     }catch(error){
         console.err("Error conectando a la BD:", error)
     }
