@@ -2,6 +2,7 @@ const { matchedData } = require("express-validator");
 const { encrypt, compare } = require("../utils/handlePassword");
 const  usersModel = require("../model/user.js")
 const { handleHttpError , handleEmailExistError } = require("../utils/handleError");
+const { tokenSign } = require("../utils/handleJwt.js");
 
 const registerCtrl = async (req, res) => {
     try{

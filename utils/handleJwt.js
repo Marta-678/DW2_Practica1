@@ -2,6 +2,9 @@ const jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.JWT_SECRET;
 
 const tokenSign = (user) => {
+  console.log("JWT_SECRET:", process.env.JWT_SECRET);
+  console.log("Generando token para:", user);
+
   return jwt.sign(
     { _id: user._id, role: user.role },
     JWT_SECRET,
@@ -19,3 +22,5 @@ const verifyToken = (tokenJwt) => {
 };
 
 module.exports = { tokenSign, verifyToken };
+
+

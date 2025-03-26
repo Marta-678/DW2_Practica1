@@ -3,9 +3,10 @@ POST http://localhost:3000/api/users/register
 Content-Type: application/json
 
 {
-    "name": "Marcos",
-    "email": "micorreo@correo.es",
+    "name": "Pep",
+    "email": "Pep@correo.es",
     "password": "123456789",
     "role": "admin"
 }
+
 
