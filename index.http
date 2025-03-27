@@ -3,17 +3,20 @@ POST http://localhost:3000/api/users/register
 Content-Type: application/json
 
 {
-    "name": "lucia",
-    "email": "lucia@correo.es",
+    "name": "Tony",
+    "email": "Tony@correo.es",
     "password": "123456789",
     "role": "admin"
 }
 
 ###
-POST http://localhost:3000/api/users/validation
-Authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U1YTAwMjZmMTQ1NjhmN2IxMzBlZjEiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzEwMTk1NCwiZXhwIjoxNzQzMTA5MTU0fQ.JaLl5HobiNpnIydWYAUxHcL3O9RTreqGejbs9T0JhwQ"
+POST http://localhost:3000/api/users/validation/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U1YzZhOGY5MjIxMWY3NWNhZDMxODgiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzExMTg0OCwiZXhwIjoxNzQzMTE5MDQ4fQ.Grm-fKgBfZooYTV0pyjQAArdGwFbXFCfs9PoL1sW7tw
+Content-Type: application/json
 
 {
-    "email":"lucia@correo.es",
-    "verificationCode": "944493"
+    "email": "Tony@correo.es",
+    "verificationCode": "689071"
 }
+
+
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U1YzZhOGY5MjIxMWY3NWNhZDMxODgiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzExMTg0OCwiZXhwIjoxNzQzMTE5MDQ4fQ.Grm-fKgBfZooYTV0pyjQAArdGwFbXFCfs9PoL1sW7tw

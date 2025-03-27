@@ -5,6 +5,6 @@ const {registerCtrl, validationCtrl}= require("../controllers/users.js")
 const userRouter = express.Router();
 
 userRouter.post("/register", validatorRegister, registerCtrl);
-userRouter.post("/validation", validatorCode, validationCtrl);
+userRouter.post("/validation/:token", validatorCode, validationCtrl);
 
 module.exports= userRouter;

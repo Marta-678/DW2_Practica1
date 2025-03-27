@@ -2,7 +2,7 @@ const { matchedData } = require("express-validator");
 const { encrypt, compare } = require("../utils/handlePassword");
 const  usersModel = require("../model/user.js")
 const { handleHttpError , handleEmailExistError } = require("../utils/handleError");
-const { tokenSign } = require("../utils/handleJwt.js");
+const { tokenSign, verifyToken } = require("../utils/handleJwt.js");
 
 const registerCtrl = async (req, res) => {
     try{
@@ -33,18 +33,19 @@ const registerCtrl = async (req, res) => {
 
 const validationCtrl= async (req, res)=> {
     try{
+        const token= req.params.token;
+        console.log("Datos recibidos:", req.params);
         
         // filtrar los datos para info no válida
-        req=matchedData(req);
-        console.log("Datos recibidos:", req);
-        const user= await usersModel.findOne({ email: req.email });
+        // req=matchedData(req);
+        console.log("Datos recibidos:", req.body);
+        const user= await usersModel.findOne({ email: req.body.email });
 
         if(!user){
             console.log("Usuario no encontrado.");
             return handleHttpError(res, "USUARIO_NO_ENCONTRADO");
         }
-        const token=req.headers.authorization?.split(" ")[1];
-        // const token= tokenSign(user);
+        
         if(!token){
             console.log("Token no proporcionado.");
             return handleHttpError(res, "TOKEN_FALTANTE");
