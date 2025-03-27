@@ -1,3 +1,7 @@
+// #TODO  comprobar que reste en los intentos, y que compurebe bien el código 
+
+
+
 const { matchedData } = require("express-validator");
 const { encrypt, compare } = require("../utils/handlePassword");
 const  usersModel = require("../model/user.js")
@@ -39,12 +43,7 @@ const validationCtrl= async (req, res)=> {
         // filtrar los datos para info no válida
         // req=matchedData(req);
         console.log("Datos recibidos:", req.body);
-        const user= await usersModel.findOne({ email: req.body.email });
-
-        if(!user){
-            console.log("Usuario no encontrado.");
-            return handleHttpError(res, "USUARIO_NO_ENCONTRADO");
-        }
+        code=req.body.verificationCode;
         
         if(!token){
             console.log("Token no proporcionado.");
@@ -53,19 +52,28 @@ const validationCtrl= async (req, res)=> {
         
         //se obtiene el código del token 
         const decoded= verifyToken(token);
+        
         if (!decoded) {
             console.log("Token no válido o expirado.");
             return handleHttpError(res, "TOKEN_INVALIDO");
         }
+
+        const user = await usersModel.findById(decoded._id);
+        console.log("Codigo de token", user);
+
+        if(!user){
+            console.log("Usuario no encontrado.");
+            return handleHttpError(res, "USUARIO_NO_ENCONTRADO");
+        }
         
         
 
-        if(user.verificationCode<=0){
+        if(user.verificationAttempts<=0){
             return handleHttpError(res, "ATTEMPTS_LIMIT");
         }
 
         //comprobar si el código es correcto
-        if(user.verificationCode!==req.verificationCode){
+        if(user.verificationCode!==code){
             console.log("Código de verificación incorrecto.");
             user.verificationAttempts-=1;
             await user.save();
