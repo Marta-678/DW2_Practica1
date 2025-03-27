@@ -31,5 +31,56 @@ const registerCtrl = async (req, res) => {
     }
 }
 
+const validationCtrl= async (req, res)=> {
+    try{
+        
+        // filtrar los datos para info no válida
+        req=matchedData(req);
+        console.log("Datos recibidos:", req);
+        const user= await usersModel.findOne({ email: req.email });
 
-module.exports={registerCtrl}
+        if(!user){
+            console.log("Usuario no encontrado.");
+            return handleHttpError(res, "USUARIO_NO_ENCONTRADO");
+        }
+        const token=req.headers.authorization?.split(" ")[1];
+        // const token= tokenSign(user);
+        if(!token){
+            console.log("Token no proporcionado.");
+            return handleHttpError(res, "TOKEN_FALTANTE");
+        }
+        
+        //se obtiene el código del token 
+        const decoded= verifyToken(token);
+        if (!decoded) {
+            console.log("Token no válido o expirado.");
+            return handleHttpError(res, "TOKEN_INVALIDO");
+        }
+        
+        
+
+        if(user.verificationCode<=0){
+            return handleHttpError(res, "ATTEMPTS_LIMIT");
+        }
+
+        //comprobar si el código es correcto
+        if(user.verificationCode!==req.verificationCode){
+            console.log("Código de verificación incorrecto.");
+            user.verificationAttempts-=1;
+            await user.save();
+            return handleHttpError(res, "CÓDIGO_INCORRECTO");
+        }
+
+        user.status= 'verified';
+        await user.save();
+        console.log("Usuario verificado:", user);
+        return res.status(200).json({ message: "Usuario verificado correctamente" });
+        
+    }catch (error){
+        console.error("Error en validationCtrl:", error);
+        handleHttpError(res, "ERROR_VALIDATION_CODE");
+    }
+}
+
+
+module.exports={registerCtrl, validationCtrl}

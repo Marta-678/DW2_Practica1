@@ -21,8 +21,9 @@ const UserSchema = new mongoose.Schema(
       default: "user"
     },
     status:{
-      type: Boolean,
-      default: false
+      type: String,
+      enum: ['pending', 'verified'],
+      default: 'pending'
     },
     verificationCode:{
       type: String

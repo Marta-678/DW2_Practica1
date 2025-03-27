@@ -3,10 +3,17 @@ POST http://localhost:3000/api/users/register
 Content-Type: application/json
 
 {
-    "name": "Pep",
-    "email": "Pep@correo.es",
+    "name": "lucia",
+    "email": "lucia@correo.es",
     "password": "123456789",
     "role": "admin"
 }
 
+###
+POST http://localhost:3000/api/users/validation
+Authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U1YTAwMjZmMTQ1NjhmN2IxMzBlZjEiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzEwMTk1NCwiZXhwIjoxNzQzMTA5MTU0fQ.JaLl5HobiNpnIydWYAUxHcL3O9RTreqGejbs9T0JhwQ"
 
+{
+    "email":"lucia@correo.es",
+    "verificationCode": "944493"
+}

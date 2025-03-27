@@ -6,4 +6,10 @@ const validatorRegister=[
     (req, res, next) => validateResults(req, res, next)
 ];
 
-module.exports = {validatorRegister}
+const validatorCode=[
+    check("email").exists().notEmpty().isEmail(),
+    check("verificationCode").exists().notEmpty().isLength({ min: 6, max: 6 }),
+    (req, res, next) => validateResults(req, res, next)
+];
+
+module.exports = {validatorRegister, validatorCode}
