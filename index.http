@@ -19,4 +19,13 @@ Content-Type: application/json
 }
 
 
+###
+POST http://localhost:3000/api/users/login
+Content-Type: application/json
+
+{
+    "email": "Tony@correo.es",
+    "password": "123456789"
+}
+
 # Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U1YzZhOGY5MjIxMWY3NWNhZDMxODgiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzExMTg0OCwiZXhwIjoxNzQzMTE5MDQ4fQ.Grm-fKgBfZooYTV0pyjQAArdGwFbXFCfs9PoL1sW7tw

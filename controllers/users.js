@@ -1,7 +1,3 @@
-// #TODO  comprobar que reste en los intentos, y que compurebe bien el código 
-
-
-
 const { matchedData } = require("express-validator");
 const { encrypt, compare } = require("../utils/handlePassword");
 const  usersModel = require("../model/user.js")
@@ -26,7 +22,7 @@ const registerCtrl = async (req, res) => {
         const user = await usersModel.create({ ...req, password, verificationCode, verificationAttempts: 3 });
         console.log("Usuario creado en la base de datos:", user);
 
-        user.set("password", undefined, { strict: false });
+        // user.set("password", undefined, { strict: false });
         res.send({ token: await tokenSign(user), user });
         
     }catch (error){
@@ -38,12 +34,7 @@ const registerCtrl = async (req, res) => {
 const validationCtrl= async (req, res)=> {
     try{
         const token= req.params.token;
-        console.log("Datos recibidos:", req.params);
-        
-        // filtrar los datos para info no válida
-        // req=matchedData(req);
-        console.log("Datos recibidos:", req.body);
-        code=req.body.verificationCode;
+        const code=req.body.verificationCode;
         
         if(!token){
             console.log("Token no proporcionado.");
@@ -59,10 +50,8 @@ const validationCtrl= async (req, res)=> {
         }
 
         const user = await usersModel.findById(decoded._id);
-        console.log("Codigo de token", user);
 
         if(!user){
-            console.log("Usuario no encontrado.");
             return handleHttpError(res, "USUARIO_NO_ENCONTRADO");
         }
         
@@ -91,5 +80,21 @@ const validationCtrl= async (req, res)=> {
     }
 }
 
+const loginCtrl= async (req, res)=>{
+    try {
+        req = matchedData(req);
+        const user = await usersModel.findOne({ email: req.email });
+        if (!user) return handleHttpError(res, "USER_NOT_EXISTS", 404);
+        
+        const check = await compare(req.password, user.password);
+        if (!check) return handleHttpError(res, "INVALID_PASSWORD", 401);
+        
+        user.set("password", undefined, { strict: false });
+        //si las credenciales son correctas, se crea el token con las credenciales del usuario. el token será unico para cada sesión
+        res.send({ token: await tokenSign(user), user });
+    } catch (err) {
+        handleHttpError(res, "ERROR_LOGIN_USER");
+    }
+}
 
-module.exports={registerCtrl, validationCtrl}
+module.exports={registerCtrl, validationCtrl, loginCtrl}
