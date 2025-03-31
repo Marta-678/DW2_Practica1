@@ -29,7 +29,7 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:3000/api/users/personalData/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5OWZkM2FlOWM1NzI4MzYyM2JhODAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzM2NDExOSwiZXhwIjoxNzQzMzcxMzE5fQ.R76TTNq-pmFEEa5bvfpPCopnlH3d5v0ukfo5bRyW918
+PUT http://localhost:3000/api/users/personalData/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5OWZkM2FlOWM1NzI4MzYyM2JhODAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzM5NTUzMiwiZXhwIjoxNzQzNDAyNzMyfQ.ZLUuOqOZzD1kvEaZXmA_PaYP4o4Tc-q2NRbUVLfeeSc
 Content-Type: application/json
 
 {
@@ -38,7 +38,8 @@ Content-Type: application/json
     "nif": "12345678A"
 }
 
-PATCH  http://localhost:3000/api/users/personalData/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5OWZkM2FlOWM1NzI4MzYyM2JhODAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzM2NDExOSwiZXhwIjoxNzQzMzcxMzE5fQ.R76TTNq-pmFEEa5bvfpPCopnlH3d5v0ukfo5bRyW918
+###
+PUT  http://localhost:3000/api/users/companyData/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2U5OWZkM2FlOWM1NzI4MzYyM2JhODAiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzM5NTUzMiwiZXhwIjoxNzQzNDAyNzMyfQ.ZLUuOqOZzD1kvEaZXmA_PaYP4o4Tc-q2NRbUVLfeeSc
 Content-Type: application/json
 
 {

@@ -137,4 +137,50 @@ const PersonalDataCtrl= async (req,res) => {
     }
 }
 
-module.exports={registerCtrl, validationCtrl, loginCtrl, PersonalDataCtrl}
+
+const CompanyDataCtrl= async (req,res) => {
+    try{
+        
+        console.log(req.body);
+        // console.log(req.body.name, req.body.lastName, req.body.nif);
+        
+        // const token= req.params.token;
+
+        // if(!token){
+        //     return handleHttpError(res, "TOKEN_FALTANTE");
+        // }
+
+        // const decoded = verifyToken(token);
+
+        // if (!decoded) {
+        //     return handleHttpError(res, "TOKEN_INVALIDO");
+        // }
+
+        // const user = await usersModel.findById(decoded._id);
+
+        // if(!user){
+        //     return handleHttpError(res, "USUARIO_NO_ENCONTRADO");
+        // }
+
+        // user.name = req.body.name;
+        // user.lastName = req.body.lastName;
+        // user.nif = req.body.nif;
+
+        // await user.save();
+
+        // console.log(user.lastName, user.name, user.nif);
+
+        // res.send({ message: "Datos personales actualizados correctamente", user });
+
+
+    }catch(err){
+        console.error(err);
+        handleHttpError(res, "ERROR_VALIDATION_PERSONAL_DATA");
+    }
+}
+
+const LogoCtrl= ()=>{
+
+}
+
+module.exports={registerCtrl, validationCtrl, loginCtrl, PersonalDataCtrl, CompanyDataCtrl, LogoCtrl}
